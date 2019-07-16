@@ -204,7 +204,7 @@ public class App extends javax.swing.JFrame {
                     .addGroup(influxdb_panelLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(influxdb_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         influxdb_panelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {influxdb_host, influxdb_password, influxdb_port, jTextField1});
@@ -295,9 +295,9 @@ public class App extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sql_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,6 +320,7 @@ public class App extends javax.swing.JFrame {
 
     private void sql_portActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_portActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_sql_portActionPerformed
 
     private void sql_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_usernameActionPerformed
@@ -364,6 +365,8 @@ public class App extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+          
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
