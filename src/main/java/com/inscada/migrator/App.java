@@ -40,6 +40,8 @@ public class App extends javax.swing.JFrame {
         sql_host = new javax.swing.JTextField();
         sql_connected = new javax.swing.JButton();
         sql_password = new javax.swing.JPasswordField();
+        text_sql_dbname = new javax.swing.JLabel();
+        sql_dbname = new javax.swing.JTextField();
         influxdb_panel = new javax.swing.JPanel();
         text_influxdb_host = new javax.swing.JLabel();
         text_influxdb_port = new javax.swing.JLabel();
@@ -48,8 +50,10 @@ public class App extends javax.swing.JFrame {
         influxdb_connected = new javax.swing.JButton();
         text_influxdb_username = new javax.swing.JLabel();
         text_influxdb_password = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        influxdb_username = new javax.swing.JTextField();
         influxdb_password = new javax.swing.JPasswordField();
+        text_influxdb_dbname = new javax.swing.JLabel();
+        influxdb_dbname = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -94,11 +98,25 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        sql_host.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sql_hostActionPerformed(evt);
+            }
+        });
+
         sql_connected.setForeground(new java.awt.Color(204, 0, 0));
         sql_connected.setText("TEST CONNECTED");
         sql_connected.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sql_connectedActionPerformed(evt);
+            }
+        });
+
+        text_sql_dbname.setText(" DB NAME:");
+
+        sql_dbname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sql_dbnameActionPerformed(evt);
             }
         });
 
@@ -109,21 +127,25 @@ public class App extends javax.swing.JFrame {
             .addGroup(sql_panelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(text_sql_host, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(text_sql_port, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(text_sql_username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(text_sql_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sql_port, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                    .addComponent(sql_username)
-                    .addComponent(sql_host)
-                    .addComponent(sql_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sql_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sql_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(sql_panelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(sql_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(sql_panelLayout.createSequentialGroup()
+                        .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(text_sql_host, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(text_sql_port, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(text_sql_username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(text_sql_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(text_sql_dbname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sql_dbname)
+                            .addComponent(sql_password)
+                            .addComponent(sql_username)
+                            .addComponent(sql_port, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                            .addComponent(sql_host))
+                        .addContainerGap(85, Short.MAX_VALUE))))
         );
 
         sql_panelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {sql_host, sql_password, sql_port, sql_username});
@@ -149,7 +171,11 @@ public class App extends javax.swing.JFrame {
                 .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_sql_password, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sql_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(text_sql_dbname, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sql_dbname, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sql_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -182,6 +208,14 @@ public class App extends javax.swing.JFrame {
 
         text_influxdb_password.setText(" PASSWORD:");
 
+        text_influxdb_dbname.setText(" DB Name");
+
+        influxdb_dbname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                influxdb_dbnameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout influxdb_panelLayout = new javax.swing.GroupLayout(influxdb_panel);
         influxdb_panel.setLayout(influxdb_panelLayout);
         influxdb_panelLayout.setHorizontalGroup(
@@ -190,24 +224,26 @@ public class App extends javax.swing.JFrame {
                 .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(influxdb_panelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(text_influxdb_dbname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(text_influxdb_host, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(text_influxdb_port, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                             .addComponent(text_influxdb_username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(text_influxdb_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(influxdb_username)
                             .addComponent(influxdb_port, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                             .addComponent(influxdb_host)
-                            .addComponent(influxdb_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(influxdb_password)
+                            .addComponent(influxdb_dbname)))
                     .addGroup(influxdb_panelLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
+                        .addGap(62, 62, 62)
                         .addComponent(influxdb_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        influxdb_panelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {influxdb_host, influxdb_password, influxdb_port, jTextField1});
+        influxdb_panelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {influxdb_host, influxdb_password, influxdb_port, influxdb_username});
 
         influxdb_panelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {text_influxdb_host, text_influxdb_password, text_influxdb_port, text_influxdb_username});
 
@@ -225,17 +261,21 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(text_influxdb_username, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(influxdb_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_influxdb_password)
                     .addComponent(influxdb_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(influxdb_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(influxdb_dbname, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(text_influxdb_dbname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(influxdb_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        influxdb_panelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {influxdb_host, influxdb_password, influxdb_port, jTextField1});
+        influxdb_panelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {influxdb_host, influxdb_password, influxdb_port, influxdb_username});
 
         influxdb_panelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {text_influxdb_host, text_influxdb_password, text_influxdb_port, text_influxdb_username});
 
@@ -288,7 +328,7 @@ public class App extends javax.swing.JFrame {
                     .addComponent(jRadioButton3))
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -308,11 +348,12 @@ public class App extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sql_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(influxdb_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -332,12 +373,43 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_influxdb_hostActionPerformed
 
     private void sql_connectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_connectedActionPerformed
-        // TODO add your handling code here:
+       
+        String host=sql_host.getText();
+        Integer port=Integer.parseInt(sql_port.getText());
+        String username=sql_username.getText();
+        Integer password=Integer.parseInt(new String(sql_password.getPassword()));
+        String dbname=sql_dbname.getText();
+        
+        Influxdb influxdb = new Influxdb();
+        influxdb.postgresqlConnect(host, port, dbname, username, password);
+        
+        
+        
     }//GEN-LAST:event_sql_connectedActionPerformed
 
     private void influxdb_connectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_influxdb_connectedActionPerformed
-        // TODO add your handling code here:
+        
+        String host=influxdb_host.getText();
+        Integer port=Integer.parseInt(influxdb_port.getText());
+        String username=influxdb_username.getText();
+        Integer password=Integer.parseInt(new String(influxdb_password.getPassword()));
+        String dbname=influxdb_dbname.getText();
+        
+        Influxdb influxdb = new Influxdb();
+        influxdb.influxdbConnect(host,port,dbname,username,password);
     }//GEN-LAST:event_influxdb_connectedActionPerformed
+
+    private void sql_hostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_hostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sql_hostActionPerformed
+
+    private void sql_dbnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_dbnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sql_dbnameActionPerformed
+
+    private void influxdb_dbnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_influxdb_dbnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_influxdb_dbnameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,10 +450,12 @@ public class App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton influxdb_connected;
+    private javax.swing.JTextField influxdb_dbname;
     private javax.swing.JTextField influxdb_host;
     private javax.swing.JPanel influxdb_panel;
     private javax.swing.JPasswordField influxdb_password;
     private javax.swing.JTextField influxdb_port;
+    private javax.swing.JTextField influxdb_username;
     private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -391,17 +465,19 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton sql_connected;
+    private javax.swing.JTextField sql_dbname;
     private javax.swing.JTextField sql_host;
     private javax.swing.JPanel sql_panel;
     private javax.swing.JPasswordField sql_password;
     private javax.swing.JTextField sql_port;
     private javax.swing.JTextField sql_username;
+    private javax.swing.JLabel text_influxdb_dbname;
     private javax.swing.JLabel text_influxdb_host;
     private javax.swing.JLabel text_influxdb_password;
     private javax.swing.JLabel text_influxdb_port;
     private javax.swing.JLabel text_influxdb_username;
+    private javax.swing.JLabel text_sql_dbname;
     private javax.swing.JLabel text_sql_host;
     private javax.swing.JLabel text_sql_password;
     private javax.swing.JLabel text_sql_port;
