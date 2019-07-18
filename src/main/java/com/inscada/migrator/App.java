@@ -391,12 +391,12 @@ public class App extends javax.swing.JFrame {
         
         String host=influxdb_host.getText();
         Integer port=Integer.parseInt(influxdb_port.getText());
-        String username=influxdb_username.getText();
-        Integer password=Integer.parseInt(new String(influxdb_password.getPassword()));
-        String dbname=influxdb_dbname.getText();
+        //String username=influxdb_username.getText();
+        //Integer password=Integer.parseInt(new String(influxdb_password.getPassword()));
+        //String dbname=influxdb_dbname.getText();
         
         Influxdb influxdb = new Influxdb();
-        influxdb.influxdbConnect(host,port,dbname,username,password);
+        influxdb.influxdbConnect(host,port);
     }//GEN-LAST:event_influxdb_connectedActionPerformed
 
     private void sql_hostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_hostActionPerformed
