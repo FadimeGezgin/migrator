@@ -1,4 +1,3 @@
-
 package com.inscada.migrator;
 
 /**
@@ -6,11 +5,14 @@ package com.inscada.migrator;
  * @author fadime
  */
 public interface Migrator {
-    
-    void eventLogs();
-    
-    void firedAlarms();
-    
-    void variableValues();
-    
+
+    void transferEventLogs();
+
+    void transferFiredAlarms();
+
+    void transferVariableValues();
+
+    boolean testPostgresqlConnection(ConnectionInfo connectionInfo);
+
+    boolean testInfluxDbConnection(ConnectionInfo connectionInfo);
 }
