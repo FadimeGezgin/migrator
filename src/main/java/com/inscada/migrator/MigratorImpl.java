@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBException;
 import org.influxdb.InfluxDBFactory;
@@ -15,11 +17,16 @@ import org.influxdb.dto.Point;
 
 public class MigratorImpl implements Migrator {
 
+    private final static Logger logger = Logger.getLogger(MigratorImpl.class.getName());
+
+    private static final String EVENT_LOG = "event_log";
+
+    private final App app;
+    
     private InfluxDB influxdbConnection;
     private Connection postgresqlConnection;
     List<Point> points = new ArrayList<>();
     private Map<Integer, String> projectIdNameMap = new ConcurrentHashMap<>();
-
     private final String postgresqlHost;
     private final Integer postgresqlPort;
     private final String postgresqlnameDB;
@@ -28,7 +35,8 @@ public class MigratorImpl implements Migrator {
     private final String influxdbHost;
     private final Integer influxdbPort;
 
-    MigratorImpl() {
+    MigratorImpl(App app) {
+        this.app = app;
         this.postgresqlHost = null;
         this.postgresqlPort = null;
         this.postgresqlnameDB = null;
@@ -71,9 +79,46 @@ public class MigratorImpl implements Migrator {
         }
         return projectName;
     }
+    
+    public int findEventLogCount() {
+        return findCount(EVENT_LOG);
+    }
+
+    public int findCount(String tableName) {
+        int count = -1;
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            String sql = String.format("select count(*) from %s", tableName);
+            st = this.postgresqlConnection.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    logger.log(Level.SEVERE, "Error while closing result set", ex);
+                }
+            }
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException ex) {
+                    logger.log(Level.SEVERE, "Error while closing statement", ex);
+                }
+            }
+        }
+    }
 
     @Override
     public void transferEventLogs() {
+ 
         try {
             int offset = 0;
 
@@ -83,9 +128,15 @@ public class MigratorImpl implements Migrator {
             ResultSet rs = st.executeQuery("SELECT *"
                     + "  FROM event_log"
                     + " ORDER BY dttm"
-                    + " LIMIT 20 OFFSET " + offset);
+                    + " LIMIT 10000 OFFSET " + offset);
 
+            int total = findEventLogCount();
+            int counter = 0;
             while (rs.next()) {
+                counter++;
+                int progress = (int) (100.0 * counter / total);
+                app.setProgress(progress);
+
                 Integer projectId = rs.getInt(6);
                 String projectName = getProjectName(projectId);
                 String activity = rs.getString(1);
@@ -98,11 +149,11 @@ public class MigratorImpl implements Migrator {
                 tags.put("activity", activity);
                 tags.put("severity", log_severity);
 
-                Point point = Point.measurement("event_log")
+                Point point = Point.measurement(EVENT_LOG)
                         .time(ts.getTime(), TimeUnit.MILLISECONDS)
                         .tag(tags).addField("msg", msg).build();
                 points.add(point);
-                Thread.sleep(1);
+                Thread.sleep(10);
             }
 
             BatchPoints batchPoints = BatchPoints
@@ -117,8 +168,10 @@ public class MigratorImpl implements Migrator {
             System.out.println("Data is written.");
             influxdbConnection.disableBatch();
 
-        } catch (InterruptedException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MigratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -156,7 +209,19 @@ public class MigratorImpl implements Migrator {
 
     @Override
     public void transferFiredAlarms() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            influxdbConnection.enableBatch();
+
+            Statement st = this.postgresqlConnection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT *"
+                    + "  FROM fired_alarm");
+
+            while (rs.next()) {
+
+            }
+
+        } catch (Exception e) {
+        }
     }
 
     @Override
