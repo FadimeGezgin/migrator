@@ -22,7 +22,7 @@ public class MigratorImpl implements Migrator {
     private static final String EVENT_LOG = "event_log";
 
     private final App app;
-    
+
     private InfluxDB influxdbConnection;
     private Connection postgresqlConnection;
     List<Point> points = new ArrayList<>();
@@ -79,7 +79,7 @@ public class MigratorImpl implements Migrator {
         }
         return projectName;
     }
-    
+
     public int findEventLogCount() {
         return findCount(EVENT_LOG);
     }
@@ -118,60 +118,65 @@ public class MigratorImpl implements Migrator {
 
     @Override
     public void transferEventLogs() {
- 
         try {
             int offset = 0;
-
-            influxdbConnection.enableBatch();
-
-            Statement st = this.postgresqlConnection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT *"
-                    + "  FROM event_log"
-                    + " ORDER BY dttm"
-                    + " LIMIT 10000 OFFSET " + offset);
-
+            int limit = 10000;
             int total = findEventLogCount();
             int counter = 0;
-            while (rs.next()) {
-                counter++;
-                int progress = (int) (100.0 * counter / total);
-                app.setProgress(progress);
 
-                Integer projectId = rs.getInt(6);
-                String projectName = getProjectName(projectId);
-                String activity = rs.getString(1);
-                String msg = rs.getString(2);
-                Timestamp ts = rs.getTimestamp(3);
-                String log_severity = rs.getString(4);
+            while (limit <= 1000000) {
+                /*Statement st = this.postgresqlConnection.createStatement();
+                 ResultSet rs = st.executeQuery("SELECT *"
+                 + "  FROM event_log"
+                 + " ORDER BY dttm"
+                 + " LIMIT %d OFFSET %d" + offset);*/
+                Statement st = postgresqlConnection.createStatement();
+                String query = String.format("SELECT * FROM event_log ORDER BY dttm LIMIT %d OFFSET %d", limit, offset);
+                ResultSet rs = st.executeQuery(query);
 
-                Map<String, String> tags = new HashMap<String, String>();
-                tags.put("project", projectName);
-                tags.put("activity", activity);
-                tags.put("severity", log_severity);
+            //int total = findEventLogCount();
+                //int counter = 0;
+                while (rs.next()) {
+                    counter++;
+                    int progress = (int) (100.0 * counter / total);
+                    System.out.println(progress);
+                    app.setProgress(progress);
 
-                Point point = Point.measurement(EVENT_LOG)
-                        .time(ts.getTime(), TimeUnit.MILLISECONDS)
-                        .tag(tags).addField("msg", msg).build();
-                points.add(point);
-                Thread.sleep(10);
+                    Integer projectId = rs.getInt(6);
+                    String projectName = getProjectName(projectId);
+                    String activity = rs.getString(1);
+                    String msg = rs.getString(2);
+                    Timestamp ts = rs.getTimestamp(3);
+                    String log_severity = rs.getString(4);
+
+                    Map<String, String> tags = new HashMap<String, String>();
+                    tags.put("project", projectName);
+                    tags.put("activity", activity);
+                    tags.put("severity", log_severity);
+
+                    Point point = Point.measurement(EVENT_LOG)
+                            .time(ts.getTime(), TimeUnit.MILLISECONDS)
+                            .tag(tags).addField("msg", msg).build();
+                    points.add(point);
+                }
+
+                BatchPoints batchPoints = BatchPoints
+                        .database("inscada")
+                        .retentionPolicy("event_log_rp")
+                        .points(points)
+                        .build();
+                influxdbConnection.write(batchPoints);
+                System.out.println("Batch written.");
+                points.clear();
+                System.out.println("Data is written.");
+                offset += 10000;
+                limit += 10000;
             }
 
-            BatchPoints batchPoints = BatchPoints
-                    .database("inscada")
-                    .retentionPolicy("event_log_rp")
-                    .points(points)
-                    .build();
-            influxdbConnection.write(batchPoints);
-            System.out.println("Batch written.");
-            points.clear();
-
-            System.out.println("Data is written.");
-            influxdbConnection.disableBatch();
-
+            //System.out.println("Data is written.");
+            //influxdbConnection.disableBatch();
         } catch (SQLException e) {
             System.out.println(e);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MigratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -200,6 +205,8 @@ public class MigratorImpl implements Migrator {
         try {
             this.influxdbConnection = InfluxDBFactory.connect(url);
             System.out.println("Connected to influxdb.");
+            influxdbConnection.enableBatch();
+
             return true;
         } catch (Exception e) {
             System.out.println("Not connected.");
@@ -209,23 +216,11 @@ public class MigratorImpl implements Migrator {
 
     @Override
     public void transferFiredAlarms() {
-        try {
-            influxdbConnection.enableBatch();
 
-            Statement st = this.postgresqlConnection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT *"
-                    + "  FROM fired_alarm");
-
-            while (rs.next()) {
-
-            }
-
-        } catch (Exception e) {
-        }
     }
 
     @Override
     public void transferVariableValues() {
-        throw new UnsupportedOperationException("Not supported yet.");
+
     }
 }

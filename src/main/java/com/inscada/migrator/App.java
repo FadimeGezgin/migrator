@@ -13,16 +13,18 @@ import javax.swing.JOptionPane;
  * @author fadime
  */
 public class App extends javax.swing.JFrame {
-
-   
-
+    
     /**
      * Creates new form App
      */
     public App() {
         initComponents();
-        setSize(950, 620);
+        setResizable(false);
+        transfer.setVisible(false);
+        progressBar.setStringPainted(true);
+        setSize(940, 610);
         setLocation((WIDTH + 500) / 2, (HEIGHT + 50) / 2);
+        
     }
 
     /**
@@ -52,7 +54,7 @@ public class App extends javax.swing.JFrame {
         influxdb_host = new javax.swing.JTextField();
         text_influxdb_port = new javax.swing.JLabel();
         influxdb_port = new javax.swing.JTextField();
-        sql_connected = new javax.swing.JButton();
+        connected = new javax.swing.JButton();
         textMessage = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -64,6 +66,7 @@ public class App extends javax.swing.JFrame {
         progressBar = new javax.swing.JProgressBar();
         progressBar2 = new javax.swing.JProgressBar();
         progressBar3 = new javax.swing.JProgressBar();
+        textMessage2 = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -189,13 +192,13 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        sql_connected.setBackground(new java.awt.Color(102, 102, 102));
-        sql_connected.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        sql_connected.setForeground(new java.awt.Color(204, 204, 204));
-        sql_connected.setText("CONNECTION");
-        sql_connected.addActionListener(new java.awt.event.ActionListener() {
+        connected.setBackground(new java.awt.Color(102, 102, 102));
+        connected.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        connected.setForeground(new java.awt.Color(204, 204, 204));
+        connected.setText("CONNECTION");
+        connected.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sql_connectedActionPerformed(evt);
+                connectedActionPerformed(evt);
             }
         });
 
@@ -230,13 +233,14 @@ public class App extends javax.swing.JFrame {
                             .addComponent(influxdb_host)
                             .addComponent(text_influxdb_host, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sql_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(textMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
             .addGroup(sql_panelLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(sql_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sql_panelLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(connected, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(sql_panelLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(textMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -280,7 +284,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(textMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sql_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(connected, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -343,14 +347,14 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        textMessage2.setBackground(new java.awt.Color(204, 0, 0));
+        textMessage2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        textMessage2.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,6 +366,12 @@ public class App extends javax.swing.JFrame {
                         .addComponent(progressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(progressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(transfer, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(textMessage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +388,9 @@ public class App extends javax.swing.JFrame {
                 .addComponent(fired_alarm)
                 .addGap(18, 18, 18)
                 .addComponent(progressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(textMessage2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -388,9 +400,8 @@ public class App extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sql_connectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sql_connectedActionPerformed
-        if (!validatePostgresqlConnection() || !validateInfluxDbConnection() ) {
-            // JOptionPane.showMessageDialog(null, "Please enter all required information.", "A Database Error Occurred", JOptionPane.ERROR_MESSAGE);
+    private void connectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectedActionPerformed
+        if (!validatePostgresqlConnection() || !validateInfluxDbConnection()) {
             textMessage.setText("Please enter all required information.");
             return;
         }
@@ -398,24 +409,20 @@ public class App extends javax.swing.JFrame {
         Integer port = Integer.parseInt(influxdb_port.getText());
         ConnectionInfo postgresqlConnectionInfo = new ConnectionInfo(sql_host.getText(), (Integer.parseInt(sql_port.getText())), sql_dbname.getText(), sql_username.getText(), (Integer.parseInt(new String(sql_password.getPassword()))));
         ConnectionInfo influxDbConnectionInfo = new ConnectionInfo(host, port, null, null, 0);
-        
+
         if (migratorImpl.testPostgresqlConnection(postgresqlConnectionInfo) && migratorImpl.testInfluxDbConnection(influxDbConnectionInfo)) {
-            //JOptionPane.showMessageDialog(null, "SUCCESSFUL CONNECTİON !");
             textMessage.setText("SUCCESSFUL CONNECTİON !");
+            transfer.setVisible(true);
 
         } else {
             if (!migratorImpl.testInfluxDbConnection(influxDbConnectionInfo)) {
-                //JOptionPane.showMessageDialog(null, "failed to connect to influx !", "A Database Error Occurred", JOptionPane.ERROR_MESSAGE);
                 textMessage.setText("failed to connect to influx !");
             } else {
                 textMessage.setText("failed to connect to postgresql !");
-                //JOptionPane.showMessageDialog(null, "failed to connect to postgresql !", "A Database Error Occurred", JOptionPane.ERROR_MESSAGE);
-
             }
 
         }
-
-    }//GEN-LAST:event_sql_connectedActionPerformed
+    }//GEN-LAST:event_connectedActionPerformed
 
 
     private void influxdb_hostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_influxdb_hostMouseClicked
@@ -456,19 +463,19 @@ public class App extends javax.swing.JFrame {
                 }
             });
             t.start();
-           
+
         }
         if (fired_alarm.isSelected()) {
-            migratorImpl.transferFiredAlarms();
+          
         }
         if (read_variable_values.isSelected()) {
-            migratorImpl.transferVariableValues();
+          
         }
         if (!event_log.isSelected() && !fired_alarm.isSelected() && !read_variable_values.isSelected()) {
-            System.out.println("PLEASE SELECT TABLE");
+             textMessage2.setText("PLEASE SELECT TABLE !");
         }
     }//GEN-LAST:event_transferActionPerformed
-    
+
     private boolean validatePostgresqlConnection() {
         if (sql_port.getText() == null || sql_password.getPassword() == null || sql_dbname.getText() == null
                 || sql_username.getText() == null || sql_host.getText() == null || sql_dbname.getText().isEmpty()
@@ -489,9 +496,9 @@ public class App extends javax.swing.JFrame {
     public void setProgress(int value) {
         this.progressBar.setValue(value);
     }
-    
+
     private static Migrator migratorImpl;
-    
+
     /**
      * @param args the command line arguments
      */
@@ -530,6 +537,7 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton connected;
     private javax.swing.JCheckBox event_log;
     private javax.swing.JCheckBox fired_alarm;
     private javax.swing.JTextField influxdb_host;
@@ -544,7 +552,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JProgressBar progressBar2;
     private javax.swing.JProgressBar progressBar3;
     private javax.swing.JCheckBox read_variable_values;
-    private javax.swing.JButton sql_connected;
     private javax.swing.JTextField sql_dbname;
     private javax.swing.JTextField sql_host;
     private javax.swing.JPanel sql_panel;
@@ -552,6 +559,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField sql_port;
     private javax.swing.JTextField sql_username;
     private javax.swing.JLabel textMessage;
+    private javax.swing.JLabel textMessage2;
     private javax.swing.JLabel text_influxdb_host;
     private javax.swing.JLabel text_influxdb_port;
     private javax.swing.JLabel text_sql_dbname;
