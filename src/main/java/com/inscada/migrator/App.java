@@ -5,26 +5,36 @@
  */
 package com.inscada.migrator;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 
 /**
  *
  * @author fadime
  */
 public class App extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form App
      */
     public App() {
         initComponents();
         setResizable(false);
+        //progressBar.setOrientation(JProgressBar.VERTICAL);
         transfer.setVisible(false);
         progressBar.setStringPainted(true);
-        setSize(940, 610);
-        setLocation((WIDTH + 500) / 2, (HEIGHT + 50) / 2);
-        
+        progressBar2.setStringPainted(true);
+        progressBar3.setStringPainted(true);
+        setSize(986, 609);
+        setLocation((WIDTH + 230) / 2, (HEIGHT + 50) / 2);
+
     }
 
     /**
@@ -60,13 +70,49 @@ public class App extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         event_log = new javax.swing.JCheckBox();
-        fired_alarm = new javax.swing.JCheckBox();
         read_variable_values = new javax.swing.JCheckBox();
         transfer = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         progressBar2 = new javax.swing.JProgressBar();
         progressBar3 = new javax.swing.JProgressBar();
         textMessage2 = new javax.swing.JLabel();
+        Date date1 = new Date();
+        SpinnerDateModel sm1 =
+        new SpinnerDateModel(date1, null, null, Calendar.HOUR_OF_DAY);
+        endtime = new javax.swing.JSpinner(sm1);
+        startdate = new org.jdesktop.swingx.JXDatePicker();
+        enddate = new org.jdesktop.swingx.JXDatePicker();
+        Date date2 = new Date();
+        SpinnerDateModel sm2 =
+        new SpinnerDateModel(date2, null, null, Calendar.HOUR_OF_DAY);
+        starttime1 = new javax.swing.JSpinner(sm2);
+        startdate1 = new org.jdesktop.swingx.JXDatePicker();
+        Date date3 = new Date();
+        SpinnerDateModel sm3 =
+        new SpinnerDateModel(date3, null, null, Calendar.HOUR_OF_DAY);
+        endtime1 = new javax.swing.JSpinner(sm3);
+        Date date4 = new Date();
+        SpinnerDateModel sm4 =
+        new SpinnerDateModel(date4, null, null, Calendar.HOUR_OF_DAY);
+        starttime2 = new javax.swing.JSpinner(sm4);
+        enddate2 = new org.jdesktop.swingx.JXDatePicker();
+        Date date5 = new Date();
+        SpinnerDateModel sm5 =
+        new SpinnerDateModel(date5, null, null, Calendar.HOUR_OF_DAY);
+        endtime2 = new javax.swing.JSpinner(sm5);
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        enddate1 = new org.jdesktop.swingx.JXDatePicker();
+        startdate2 = new org.jdesktop.swingx.JXDatePicker();
+        Date date = new Date();
+        SpinnerDateModel sm =
+        new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
+        starttime = new javax.swing.JSpinner(sm);
+        fired_alarm = new javax.swing.JCheckBox();
 
         jInternalFrame1.setVisible(true);
 
@@ -98,7 +144,7 @@ public class App extends javax.swing.JFrame {
         sql_port.setBackground(new java.awt.Color(36, 47, 65));
         sql_port.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         sql_port.setForeground(new java.awt.Color(204, 204, 204));
-        sql_port.setText("Enter Your Port");
+        sql_port.setText("5433");
         sql_port.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         sql_port.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,7 +163,7 @@ public class App extends javax.swing.JFrame {
         sql_username.setBackground(new java.awt.Color(36, 47, 65));
         sql_username.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         sql_username.setForeground(new java.awt.Color(204, 204, 204));
-        sql_username.setText("Enter Your User Name");
+        sql_username.setText("postgres");
         sql_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         sql_username.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -128,7 +174,7 @@ public class App extends javax.swing.JFrame {
         sql_host.setBackground(new java.awt.Color(36, 47, 65));
         sql_host.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         sql_host.setForeground(new java.awt.Color(204, 204, 204));
-        sql_host.setText("Enter Your Host");
+        sql_host.setText("localhost");
         sql_host.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         sql_host.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -139,7 +185,7 @@ public class App extends javax.swing.JFrame {
         sql_password.setBackground(new java.awt.Color(36, 47, 65));
         sql_password.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         sql_password.setForeground(new java.awt.Color(204, 204, 204));
-        sql_password.setText("Enter Your Password");
+        sql_password.setText("1234");
         sql_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         sql_password.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,7 +200,7 @@ public class App extends javax.swing.JFrame {
         sql_dbname.setBackground(new java.awt.Color(36, 47, 65));
         sql_dbname.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         sql_dbname.setForeground(new java.awt.Color(204, 204, 204));
-        sql_dbname.setText("Enter Your DB Name");
+        sql_dbname.setText("postgres");
         sql_dbname.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         sql_dbname.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -169,7 +215,7 @@ public class App extends javax.swing.JFrame {
         influxdb_host.setBackground(new java.awt.Color(36, 47, 65));
         influxdb_host.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         influxdb_host.setForeground(new java.awt.Color(204, 204, 204));
-        influxdb_host.setText("Enter Your Host");
+        influxdb_host.setText("localhost");
         influxdb_host.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         influxdb_host.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -184,7 +230,7 @@ public class App extends javax.swing.JFrame {
         influxdb_port.setBackground(new java.awt.Color(36, 47, 65));
         influxdb_port.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         influxdb_port.setForeground(new java.awt.Color(204, 204, 204));
-        influxdb_port.setText("Enter Your Port");
+        influxdb_port.setText("8086");
         influxdb_port.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 204, 204)));
         influxdb_port.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -215,33 +261,29 @@ public class App extends javax.swing.JFrame {
                 .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sql_panelLayout.createSequentialGroup()
                         .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sql_dbname, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(text_sql_port, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(text_sql_host, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(sql_host)
                             .addComponent(sql_password)
                             .addComponent(sql_port, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                            .addComponent(text_sql_dbname, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(text_sql_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(78, Short.MAX_VALUE))
+                            .addComponent(text_sql_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sql_dbname, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(text_sql_dbname, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(125, Short.MAX_VALUE))
                     .addGroup(sql_panelLayout.createSequentialGroup()
                         .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_sql_username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(sql_username)
                             .addComponent(influxdb_port, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(text_influxdb_port, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(influxdb_host)
                             .addComponent(text_influxdb_host, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 32, Short.MAX_VALUE))))
             .addGroup(sql_panelLayout.createSequentialGroup()
-                .addGroup(sql_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(sql_panelLayout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(connected, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(sql_panelLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(textMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(90, 90, 90)
+                .addComponent(connected, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         sql_panelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {sql_dbname, sql_host, sql_password, sql_port, sql_username});
@@ -296,7 +338,7 @@ public class App extends javax.swing.JFrame {
 
         sql_panelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {influxdb_host, influxdb_port});
 
-        getContentPane().add(sql_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 400, 580));
+        getContentPane().add(sql_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 370, 580));
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
         jPanel2.setForeground(new java.awt.Color(0, 0, 102));
@@ -327,10 +369,6 @@ public class App extends javax.swing.JFrame {
         event_log.setText(" EVENT LOG");
         event_log.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
-        fired_alarm.setBackground(new java.awt.Color(0, 102, 102));
-        fired_alarm.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        fired_alarm.setText(" FIRED ALARM");
-
         read_variable_values.setBackground(new java.awt.Color(0, 102, 102));
         read_variable_values.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         read_variable_values.setText(" READ VARIABLE VALUES");
@@ -347,55 +385,179 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        progressBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         textMessage2.setBackground(new java.awt.Color(204, 0, 0));
         textMessage2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         textMessage2.setForeground(new java.awt.Color(204, 0, 0));
+
+        JSpinner.DateEditor de1 = new JSpinner.DateEditor(endtime, "HH:mm:ss");
+        endtime.setEditor(de1);
+
+        startdate.setForeground(new java.awt.Color(0, 102, 102));
+
+        JSpinner.DateEditor de2 = new JSpinner.DateEditor(starttime1, "HH:mm:ss");
+        starttime1.setEditor(de2);
+
+        JSpinner.DateEditor de3 = new JSpinner.DateEditor(endtime1, "HH:mm:ss");
+        endtime1.setEditor(de3);
+
+        JSpinner.DateEditor de4 = new JSpinner.DateEditor(starttime2, "HH:mm:ss");
+        starttime2.setEditor(de4);
+
+        JSpinner.DateEditor de5 = new JSpinner.DateEditor(endtime2, "HH:mm:ss");
+        endtime2.setEditor(de5);
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText(" START DATE");
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText(" END DATE");
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setText(" START DATE");
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setText(" END DATE");
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setText(" END DATE");
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setText(" START DATE");
+
+        JSpinner.DateEditor de = new JSpinner.DateEditor(starttime, "HH:mm:ss");
+        starttime.setEditor(de);
+
+        fired_alarm.setBackground(new java.awt.Color(0, 102, 102));
+        fired_alarm.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        fired_alarm.setText(" FIRED ALARM");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fired_alarm)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(read_variable_values)
-                        .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                        .addComponent(event_log)
-                        .addComponent(progressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(progressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(transfer, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(textMessage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(event_log)
+                            .addComponent(read_variable_values)
+                            .addComponent(fired_alarm)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(transfer, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(textMessage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(progressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(startdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(startdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(startdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(endtime1)
+                                    .addComponent(starttime2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(endtime)
+                                    .addComponent(starttime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(endtime2)
+                                    .addComponent(starttime1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(progressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {endtime, endtime1, endtime2, starttime, starttime1, starttime2});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {enddate, enddate1, enddate2, startdate, startdate1, startdate2});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(event_log)
-                .addGap(18, 18, 18)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(starttime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(enddate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addComponent(read_variable_values)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(starttime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(enddate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endtime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(progressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(fired_alarm)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(starttime2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(enddate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endtime2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(progressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addGap(73, 73, 73)
                 .addComponent(textMessage2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(20, 20, 20))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 260, 580));
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {endtime, endtime1, endtime2, starttime, starttime1, starttime2});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {enddate, enddate1, enddate2, startdate, startdate1, startdate2});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {progressBar, progressBar2, progressBar3});
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 330, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -459,23 +621,65 @@ public class App extends javax.swing.JFrame {
 
                 @Override
                 public void run() {
-                    migratorImpl.transferEventLogs();
+               selectEventLog();
                 }
             });
             t.start();
 
         }
         if (fired_alarm.isSelected()) {
-          
+            Thread f = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    selectFiredAlarm();
+                }
+            });
+            f.start();
         }
         if (read_variable_values.isSelected()) {
-          
+            Thread r = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                selectVariableValue();
+                }
+            });
+            r.start();
+
         }
         if (!event_log.isSelected() && !fired_alarm.isSelected() && !read_variable_values.isSelected()) {
-             textMessage2.setText("PLEASE SELECT TABLE !");
+            textMessage2.setText("PLEASE SELECT TABLE !");
         }
     }//GEN-LAST:event_transferActionPerformed
 
+    public void selectEventLog(){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat tf = new SimpleDateFormat("  HH:mm:ss");
+        String startDate = df.format(startdate.getDate());
+        String starTime = tf.format(starttime.getValue());
+        String endDate = df.format(enddate.getDate());
+        String endTime = tf.format(endtime.getValue());
+        migratorImpl.transferEventLogs(startDate+starTime, endDate+endTime);
+    }
+    public void selectVariableValue(){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat tf = new SimpleDateFormat("  HH:mm:ss");
+        String startDate = df.format(startdate1.getDate());
+        String starTime = tf.format(starttime1.getValue());
+        String endDate = df.format(enddate1.getDate());
+        String endTime = tf.format(endtime1.getValue());
+        migratorImpl.transferVariableValues(startDate+starTime, endDate+endTime);
+    }
+    public void selectFiredAlarm(){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat tf = new SimpleDateFormat("  HH:mm:ss");
+        String startDate = df.format(startdate2.getDate());
+        String starTime = tf.format(starttime2.getValue());
+        String endDate = df.format(enddate2.getDate());
+        String endTime = tf.format(endtime2.getValue());
+        migratorImpl.transferFiredAlarms(startDate+starTime, endDate+endTime);
+    }
     private boolean validatePostgresqlConnection() {
         if (sql_port.getText() == null || sql_password.getPassword() == null || sql_dbname.getText() == null
                 || sql_username.getText() == null || sql_host.getText() == null || sql_dbname.getText().isEmpty()
@@ -495,6 +699,14 @@ public class App extends javax.swing.JFrame {
 
     public void setProgress(int value) {
         this.progressBar.setValue(value);
+    }
+
+    public void setProgress3(int value) {
+        this.progressBar3.setValue(value);
+    }
+
+    public void setProgress2(int value) {
+        this.progressBar2.setValue(value);
     }
 
     private static Migrator migratorImpl;
@@ -538,12 +750,24 @@ public class App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connected;
+    private org.jdesktop.swingx.JXDatePicker enddate;
+    private org.jdesktop.swingx.JXDatePicker enddate1;
+    private org.jdesktop.swingx.JXDatePicker enddate2;
+    private javax.swing.JSpinner endtime;
+    private javax.swing.JSpinner endtime1;
+    private javax.swing.JSpinner endtime2;
     private javax.swing.JCheckBox event_log;
     private javax.swing.JCheckBox fired_alarm;
     private javax.swing.JTextField influxdb_host;
     private javax.swing.JTextField influxdb_port;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
@@ -558,6 +782,12 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPasswordField sql_password;
     private javax.swing.JTextField sql_port;
     private javax.swing.JTextField sql_username;
+    private org.jdesktop.swingx.JXDatePicker startdate;
+    private org.jdesktop.swingx.JXDatePicker startdate1;
+    private org.jdesktop.swingx.JXDatePicker startdate2;
+    private javax.swing.JSpinner starttime;
+    private javax.swing.JSpinner starttime1;
+    private javax.swing.JSpinner starttime2;
     private javax.swing.JLabel textMessage;
     private javax.swing.JLabel textMessage2;
     private javax.swing.JLabel text_influxdb_host;
@@ -569,4 +799,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel text_sql_username;
     private javax.swing.JButton transfer;
     // End of variables declaration//GEN-END:variables
+
+   
 }

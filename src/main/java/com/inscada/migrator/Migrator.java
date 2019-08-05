@@ -6,11 +6,11 @@ package com.inscada.migrator;
  */
 public interface Migrator {
 
-    void transferEventLogs();
+    void transferEventLogs(String startE, String endE);
 
-    void transferFiredAlarms();
+    void transferFiredAlarms(String startF, String endF);
 
-    void transferVariableValues();
+    void transferVariableValues(String startV, String endV);
 
     boolean testPostgresqlConnection(ConnectionInfo connectionInfo);
 
