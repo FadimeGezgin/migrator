@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +19,7 @@ import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
+import sun.rmi.runtime.Log;
 
 public class MigratorImpl implements Migrator {
 
@@ -46,6 +50,10 @@ public class MigratorImpl implements Migrator {
     static int counter = 0;
     static int counter2 = 0;
     static int counter3 = 0;
+    static int batchsize;
+    static int offset = 0;
+    private int Count;
+    static int a=0;
 
     MigratorImpl(App app) {
         this.app = app;
@@ -65,7 +73,6 @@ public class MigratorImpl implements Migrator {
     public Connection getPostgresqlConnection() {
         return postgresqlConnection;
     }
-    
 
     @Override
     public boolean testPostgresqlConnection(ConnectionInfo postgresqlConnectionInfo) {
@@ -195,17 +202,71 @@ public class MigratorImpl implements Migrator {
     }
 
     @Override
-    public void transferEventLogs(String startE, String endE) {
-        final int total = findNameCount(EVENT_LOG);
+    public void threadProduce(int nThreads, int nBatchSize, final String tableName, final String startTime, final String endTime) {
+        ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
+        
+        batchsize = nBatchSize;
+        final int batch = nBatchSize;
+        
+        try {
+            Statement st1 = postgresqlConnection.createStatement();
+            String format = String.format("select count(*) from %s  WHERE dttm BETWEEN '%s' AND '%s' ", tableName, startTime, endTime);
+            ResultSet rs2 = st1.executeQuery(format);
+            
+            while (rs2.next()) {
+                Count = rs2.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MigratorImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        int temp = Count / batch;
+     
+        for ( int i = 0; i < temp; i++) {
+            executorService.execute(new Runnable() {
+                
+           
+                @Override
+                public void run() {
+                    a++;
+                    if ("event_log".equals(tableName)) {
+                        
+                        System.out.println("thread no: " + a);
+                        System.out.println("batch no: " + batchsize);
+                        transferEventLogs(startTime, endTime, batchsize, offset);
+                        offset = offset + batch;
+                        batchsize = batchsize + batch;
 
+                    } else if ("fired_alarm".equals(tableName)) {
+
+                    } else {
+
+                    }
+                }
+            });
+        }
+        executorService.shutdown();
+    }
+
+    @Override
+    public void transferEventLogs(final String startE, final String endE, int limit, int offset) {
+        final int total = findNameCount(EVENT_LOG);
+        
         try {
             Statement st = postgresqlConnection.createStatement();
-            String query = String.format("SELECT * FROM event_log WHERE dttm BETWEEN '%s' AND '%s' ",startE,endE);
+            String query = String.format("SELECT * FROM event_log  WHERE dttm BETWEEN '%s' AND '%s' ORDER BY dttm LIMIT %d OFFSET %d ", startE, endE, limit, offset);
             ResultSet rs = st.executeQuery(query);
-
+            Statement st1 = postgresqlConnection.createStatement();
+            String format = String.format("select count(*) from event_log  WHERE dttm BETWEEN '%s' AND '%s' ", startE, endE);
+            ResultSet rs2 = st1.executeQuery(format);
+            
+            while (rs2.next()) {
+                Count = rs2.getInt(1);
+            }
+            
             while (rs.next()) {
                 counter++;
-                int progress = (int) (100.0 * counter / 100);
+                int progress = (int) (100.0 * counter / Count);
                 app.setProgress(progress);
 
                 Integer projectId = rs.getInt(6);
@@ -238,17 +299,18 @@ public class MigratorImpl implements Migrator {
         } catch (SQLException e) {
             System.out.println(e);
         }
+
     }
 
     @Override
-    public void transferFiredAlarms(String startF, String endF) {
+    public void transferFiredAlarms(String startF, String endF, int limit, int offset) {
         final int total = findNameCount(FIRED_ALARM);
 
         try {
-           
             Statement st1 = postgresqlConnection.createStatement();
-            String query1 = String.format("SELECT * FROM fired_alarm WHERE on_dttm BETWEEN '%s' AND '%s' ",startF,endF);
+            String query1 = String.format("SELECT * FROM fired_alarm WHERE on_dttm BETWEEN '%s' AND '%s' ", startF, endF);
             ResultSet rs1 = st1.executeQuery(query1);
+
             while (rs1.next()) {
                 counter2++;
                 int progress = (int) (100.0 * counter2 / total);
@@ -290,18 +352,17 @@ public class MigratorImpl implements Migrator {
     }
 
     @Override
-    public void transferVariableValues(String startV, String endV) {
+    public void transferVariableValues(String startV, String endV, int limit, int offset) {
         final int total = findNameCount(READ_VARIABLE_NUM);
 
         try {
             Statement st2 = postgresqlConnection.createStatement();
-            String query2 = String.format("SELECT * FROM read_variable_num WHERE read_dttm BETWEEN '%s' AND '%s' ",startV,endV);
+            String query2 = String.format("SELECT * FROM read_variable_num WHERE read_dttm BETWEEN '%s' AND '%s' ", startV, endV);
             ResultSet rs2 = st2.executeQuery(query2);
             Statement st3 = postgresqlConnection.createStatement();
             ResultSet rs3 = st3.executeQuery("SELECT * FROM project LIMIT 100");
 
             while (rs2.next() && rs3.next()) {
-
                 counter3++;
                 int progress = (int) (100.0 * counter3 / total);
                 app.setProgress2(progress);
@@ -337,5 +398,4 @@ public class MigratorImpl implements Migrator {
             Logger.getLogger(MigratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

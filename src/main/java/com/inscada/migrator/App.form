@@ -480,60 +480,68 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="event_log" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="read_variable_values" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="fired_alarm" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="event_log" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="read_variable_values" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fired_alarm" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="transfer" pref="180" max="32767" attributes="0"/>
-                              <Component id="textMessage2" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="transfer" pref="180" max="32767" attributes="0"/>
+                                  <Component id="textMessage2" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="progressBar2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="progressBar" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" linkSize="21" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" linkSize="21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" linkSize="21" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" linkSize="21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" linkSize="21" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" linkSize="21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="startdate" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="enddate" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="startdate1" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="enddate1" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="startdate2" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="enddate2" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="endtime1" linkSize="17" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="starttime2" linkSize="17" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="endtime" linkSize="17" max="32767" attributes="0"/>
-                                      <Component id="starttime" linkSize="17" min="-2" max="-2" attributes="0"/>
-                                      <Component id="endtime2" linkSize="17" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="starttime1" linkSize="17" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="progressBar2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="progressBar" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel4" linkSize="21" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                                          <Component id="jLabel5" linkSize="21" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" linkSize="21" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" linkSize="21" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" linkSize="21" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" linkSize="21" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="startdate" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="enddate" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="startdate1" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="enddate1" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="startdate2" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="enddate2" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="endtime1" linkSize="17" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="starttime2" linkSize="17" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                          <Component id="endtime" linkSize="17" max="32767" attributes="0"/>
+                                          <Component id="starttime" linkSize="17" min="-2" max="-2" attributes="0"/>
+                                          <Component id="endtime2" linkSize="17" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="starttime1" linkSize="17" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="progressBar3" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="progressBar3" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="batchSize" min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="thread" min="-2" pref="77" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="70" max="32767" attributes="0"/>
@@ -591,7 +599,12 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="progressBar3" linkSize="25" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="batchSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="thread" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="textMessage2" min="-2" pref="22" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="transfer" min="-2" pref="46" max="-2" attributes="0"/>
@@ -806,6 +819,10 @@
             </Property>
             <Property name="text" type="java.lang.String" value=" FIRED ALARM"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="batchSize">
+        </Component>
+        <Component class="javax.swing.JTextField" name="thread">
         </Component>
       </SubComponents>
     </Container>
