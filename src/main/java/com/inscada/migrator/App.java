@@ -698,7 +698,7 @@ public class App extends javax.swing.JFrame {
         starTime = tf.format(starttime2.getValue());
         endDate = df.format(enddate2.getDate());
         endTime = tf.format(endtime2.getValue());
-        //   migratorImpl.transferFiredAlarms(startDate + starTime, endDate + endTime);
+        // migratorImpl.transferFiredAlarms(startDate + starTime, endDate + endTime);
     }
 
     private boolean validatePostgresqlConnection() {

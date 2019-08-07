@@ -6,7 +6,7 @@ package com.inscada.migrator;
  */
 public interface Migrator {
 
-    void transferEventLogs(String startE, String endE,int limit,int offset);
+    void transferEventLogs(String startE, String endE);
 
     void transferFiredAlarms(String startF, String endF,int limit,int offset);
 

@@ -1,5 +1,6 @@
 package com.inscada.migrator;
 
+import com.sun.scenario.effect.Offset;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,10 +51,11 @@ public class MigratorImpl implements Migrator {
     static int counter = 0;
     static int counter2 = 0;
     static int counter3 = 0;
-    static int batchsize;
-    static int offset = 0;
+    
+    private int batchs;
+    private int limit = 0;
+    private int offset = 0;
     private int Count;
-    static int a=0;
 
     MigratorImpl(App app) {
         this.app = app;
@@ -203,44 +205,37 @@ public class MigratorImpl implements Migrator {
 
     @Override
     public void threadProduce(int nThreads, int nBatchSize, final String tableName, final String startTime, final String endTime) {
+        
         ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
-        
-        batchsize = nBatchSize;
-        final int batch = nBatchSize;
-        
+        batchs = nBatchSize;
+
         try {
             Statement st1 = postgresqlConnection.createStatement();
             String format = String.format("select count(*) from %s  WHERE dttm BETWEEN '%s' AND '%s' ", tableName, startTime, endTime);
             ResultSet rs2 = st1.executeQuery(format);
-            
+
             while (rs2.next()) {
                 Count = rs2.getInt(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MigratorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        int temp = Count / batch;
-     
-        for ( int i = 0; i < temp; i++) {
+
+        int temp = Count / batchs;
+
+        for (int i = 0; i < temp; i++) {
             executorService.execute(new Runnable() {
-                
-           
+
                 @Override
                 public void run() {
-                    a++;
                     if ("event_log".equals(tableName)) {
+                        transferEventLogs(startTime, endTime);
                         
-                        System.out.println("thread no: " + a);
-                        System.out.println("batch no: " + batchsize);
-                        transferEventLogs(startTime, endTime, batchsize, offset);
-                        offset = offset + batch;
-                        batchsize = batchsize + batch;
-
                     } else if ("fired_alarm".equals(tableName)) {
+                        /////////////
 
                     } else {
-
+                        /////////////
                     }
                 }
             });
@@ -249,9 +244,10 @@ public class MigratorImpl implements Migrator {
     }
 
     @Override
-    public void transferEventLogs(final String startE, final String endE, int limit, int offset) {
-        final int total = findNameCount(EVENT_LOG);
+    public void transferEventLogs(final String startE, final String endE) {
         
+        limit = limit + batchs;
+
         try {
             Statement st = postgresqlConnection.createStatement();
             String query = String.format("SELECT * FROM event_log  WHERE dttm BETWEEN '%s' AND '%s' ORDER BY dttm LIMIT %d OFFSET %d ", startE, endE, limit, offset);
@@ -259,11 +255,11 @@ public class MigratorImpl implements Migrator {
             Statement st1 = postgresqlConnection.createStatement();
             String format = String.format("select count(*) from event_log  WHERE dttm BETWEEN '%s' AND '%s' ", startE, endE);
             ResultSet rs2 = st1.executeQuery(format);
-            
+
             while (rs2.next()) {
                 Count = rs2.getInt(1);
             }
-            
+
             while (rs.next()) {
                 counter++;
                 int progress = (int) (100.0 * counter / Count);
@@ -296,10 +292,11 @@ public class MigratorImpl implements Migrator {
             System.out.println("Batch written.");
             e_points.clear();
             System.out.println("Data is written.");
+
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        offset = offset + batchs;
     }
 
     @Override
