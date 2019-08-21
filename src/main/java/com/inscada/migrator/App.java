@@ -9,9 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
@@ -25,6 +24,7 @@ public class App extends javax.swing.JFrame {
     String startDate;
     String starTime;
     String endDate;
+    
 
     /**
      * Creates new form App
@@ -32,14 +32,18 @@ public class App extends javax.swing.JFrame {
     public App() {
         initComponents();
         setResizable(false);
-        //progressBar.setOrientation(JProgressBar.VERTICAL);
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\fadime\\Desktop\\DERSLER\\JAVA\\netbeans\\migrator\\src\\main\\resources\\inscada1.png");
+        jLabel2.setIcon(imageIcon);
+        ButtonGroup bt = new ButtonGroup();
+        bt.add(event_log);
+        bt.add(read_variable_values);
+        bt.add(fired_alarm);
         transfer.setVisible(false);
         progressBar.setStringPainted(true);
         progressBar2.setStringPainted(true);
         progressBar3.setStringPainted(true);
         setSize(986, 609);
         setLocation((WIDTH + 230) / 2, (HEIGHT + 50) / 2);
-
     }
 
     /**
@@ -120,6 +124,8 @@ public class App extends javax.swing.JFrame {
         fired_alarm = new javax.swing.JCheckBox();
         batchSize = new javax.swing.JTextField();
         thread = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -350,14 +356,11 @@ public class App extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
         jPanel2.setForeground(new java.awt.Color(0, 0, 102));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\fadime\\Desktop\\inscada1.png")); // NOI18N
-        jLabel2.setText("jLabel2");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,61 +449,72 @@ public class App extends javax.swing.JFrame {
         fired_alarm.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         fired_alarm.setText(" FIRED ALARM");
 
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setText(" BATCH SIZE");
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setText(" THREAD SIZE");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(event_log)
-                                .addComponent(read_variable_values)
-                                .addComponent(fired_alarm)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(72, 72, 72)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(transfer, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                .addComponent(textMessage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(progressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(startdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(enddate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(startdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(enddate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(startdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(enddate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(endtime1)
-                                        .addComponent(starttime2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(endtime)
-                                        .addComponent(starttime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(endtime2)
-                                        .addComponent(starttime1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(progressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(batchSize, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(thread, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(event_log)
+                            .addComponent(read_variable_values)
+                            .addComponent(fired_alarm)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(transfer, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(textMessage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(progressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(startdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(startdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(startdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(endtime1)
+                                    .addComponent(starttime2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(endtime)
+                                    .addComponent(starttime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(endtime2)
+                                    .addComponent(starttime1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(progressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(batchSize)
+                            .addComponent(thread))))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -555,11 +569,15 @@ public class App extends javax.swing.JFrame {
                     .addComponent(endtime2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(progressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(batchSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(thread, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(thread, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(21, 21, 21)
                 .addComponent(textMessage2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -584,6 +602,7 @@ public class App extends javax.swing.JFrame {
             textMessage.setText("Please enter all required information.");
             return;
         }
+
         String host = influxdb_host.getText();
         Integer port = Integer.parseInt(influxdb_port.getText());
         ConnectionInfo postgresqlConnectionInfo = new ConnectionInfo(sql_host.getText(), (Integer.parseInt(sql_port.getText())), sql_dbname.getText(), sql_username.getText(), (Integer.parseInt(new String(sql_password.getPassword()))));
@@ -592,14 +611,13 @@ public class App extends javax.swing.JFrame {
         if (migratorImpl.testPostgresqlConnection(postgresqlConnectionInfo) && migratorImpl.testInfluxDbConnection(influxDbConnectionInfo)) {
             textMessage.setText("SUCCESSFUL CONNECTİON !");
             transfer.setVisible(true);
-
+            connected.setVisible(false);
         } else {
             if (!migratorImpl.testInfluxDbConnection(influxDbConnectionInfo)) {
-                textMessage.setText("failed to connect to influx !");
+                textMessage.setText("Failed to connect to InfluxDB!");
             } else {
-                textMessage.setText("failed to connect to postgresql !");
+                textMessage.setText("Failed to connect to PostgreSQL!");
             }
-
         }
     }//GEN-LAST:event_connectedActionPerformed
 
@@ -633,17 +651,18 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_influxdb_portMouseClicked
 
     private void transferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferActionPerformed
+        transfer.setEnabled(false);
+        
         if (event_log.isSelected()) {
             Thread t = new Thread(new Runnable() {
 
                 @Override
                 public void run() {
                     selectEventLog();
-                    migratorImpl.threadProduce(Integer.parseInt(thread.getText()), Integer.parseInt(batchSize.getText()), "event_log", startDate + starTime, endDate + endTime);
+                    migratorImpl.threadProduce(Integer.parseInt(thread.getText()), Integer.parseInt(batchSize.getText()), "event_log", "dttm", startDate + starTime, endDate + endTime);
                 }
             });
             t.start();
-
         }
         if (fired_alarm.isSelected()) {
             Thread f = new Thread(new Runnable() {
@@ -651,6 +670,7 @@ public class App extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     selectFiredAlarm();
+                    migratorImpl.threadProduce(Integer.parseInt(thread.getText()), Integer.parseInt(batchSize.getText()), "fired_alarm", "on_dttm", startDate + starTime, endDate + endTime);
                 }
             });
             f.start();
@@ -661,16 +681,19 @@ public class App extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     selectVariableValue();
+                    migratorImpl.threadProduce(Integer.parseInt(thread.getText()), Integer.parseInt(batchSize.getText()), "read_variable_num", "read_dttm", startDate + starTime, endDate + endTime);
                 }
             });
             r.start();
-
         }
         if (!event_log.isSelected() && !fired_alarm.isSelected() && !read_variable_values.isSelected()) {
             textMessage2.setText("PLEASE SELECT TABLE !");
         }
     }//GEN-LAST:event_transferActionPerformed
-
+   
+    public void transferEnabled(){
+        transfer.setEnabled(true);
+    }
     public void selectEventLog() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat tf = new SimpleDateFormat("  HH:mm:ss");
@@ -678,7 +701,6 @@ public class App extends javax.swing.JFrame {
         starTime = tf.format(starttime.getValue());
         endDate = df.format(enddate.getDate());
         endTime = tf.format(endtime.getValue());
-        // migratorImpl.transferEventLogs(startDate+starTime, endDate+endTime);
     }
 
     public void selectVariableValue() {
@@ -688,7 +710,6 @@ public class App extends javax.swing.JFrame {
         starTime = tf.format(starttime1.getValue());
         endDate = df.format(enddate1.getDate());
         endTime = tf.format(endtime1.getValue());
-        // migratorImpl.transferVariableValues(startDate + starTime, endDate + endTime);
     }
 
     public void selectFiredAlarm() {
@@ -698,7 +719,6 @@ public class App extends javax.swing.JFrame {
         starTime = tf.format(starttime2.getValue());
         endDate = df.format(enddate2.getDate());
         endTime = tf.format(endtime2.getValue());
-        // migratorImpl.transferFiredAlarms(startDate + starTime, endDate + endTime);
     }
 
     private boolean validatePostgresqlConnection() {
@@ -761,6 +781,7 @@ public class App extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 App app = new App();
                 migratorImpl = new MigratorImpl(app);
@@ -790,6 +811,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
@@ -822,5 +845,4 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField thread;
     private javax.swing.JButton transfer;
     // End of variables declaration//GEN-END:variables
-
 }

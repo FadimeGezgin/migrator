@@ -6,15 +6,15 @@ package com.inscada.migrator;
  */
 public interface Migrator {
 
-    void transferEventLogs(String startE, String endE);
+    void transferEventLogs(int offset, int limit, String startE, String endE, int count);
 
-    void transferFiredAlarms(String startF, String endF,int limit,int offset);
+    void transferFiredAlarms(int limit, int offset, String startF, String endF, int count);
 
-    void transferVariableValues(String startV, String endV,int limit,int offset);
+    void transferVariableValues(int limit, int offset, String startV, String endV, int count);
 
     boolean testPostgresqlConnection(ConnectionInfo connectionInfo);
 
     boolean testInfluxDbConnection(ConnectionInfo connectionInfo);
 
-    public void threadProduce(int nThreads , int nBatchSize, String tableName,String startTime,String endTime);
+    public void threadProduce(int nThreads, int nBatchSize, String tableName, String timestamp, String startTime, String endTime);
 }
