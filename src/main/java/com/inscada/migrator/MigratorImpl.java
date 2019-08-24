@@ -153,14 +153,13 @@ public class MigratorImpl implements Migrator {
         if (tableName.equals("read_variable_num")) {
             getAllProjectId(count);
         }
+        
         for (int i = 0; i < temp-1; i++) {
             counter(executorService, tableName, offset, limit, Threads, startTime, endTime,count);
             offset += batch;
         }
         limit=batch+stayedtmp;
         counter(executorService, tableName, offset, limit, Threads, startTime, endTime,count);
-        
-        
     }
 
     private int Count(String tableName, String timestamp, String startDate, String endDate) {
